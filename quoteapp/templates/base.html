@@ -1,0 +1,25 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quote Application{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'quoteapp/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Alan Turing Quote of the Day</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'quote' %}">Home</a></li>
+                <li><a href="{% url 'show_all' %}">Show All</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
