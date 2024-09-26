@@ -21,14 +21,14 @@ def quote(request):
         'quote': selected_quote,
         'image': selected_image
     }
-    return render(request, 'quote.html', context)
+    return render(request, 'quotes/quote.html', context)
 
 def show_all(request):
     context = {
         'quotes': quotes,
         'images': images
     }
-    return render(request, 'showall.html', context)
+    return render(request, 'quotes/showall.html', context)
 
 def about(request):
     context = {
@@ -42,4 +42,4 @@ def about(request):
             highlighting both his genius and the societal challenges he faced.",
         'creator': "Brandon Bouley is a Computer Science senior. Who is gay like Alan Turing was. Please give me an A."
     }
-    return render(request, 'about.html', context)
+    return render(request, 'quotes/about.html', context)
