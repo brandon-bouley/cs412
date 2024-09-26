@@ -28,7 +28,7 @@ def show_all(request):
         'quotes': quotes,
         'images': images
     }
-    return render(request, 'quotes/showall.html', context)
+    return render(request, 'quotes/show_all.html', context)
 
 def about(request):
     context = {
