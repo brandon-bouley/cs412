@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Restaurant{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="grid-container">
+        <header>
+            <h1>Brandon's Bussin' Bistro!</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'main' %}">Main</a></li>
+                <li><a href="{% url 'order' %}">Order</a></li>
+            </ul>
+        </nav>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

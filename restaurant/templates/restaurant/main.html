@@ -1,0 +1,16 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+{% block title %} BBB Restaurant {% endblock %}
+
+{% block content %}
+<h2>Brandon's Bussin' Bistro</h2>
+<p>424 Commonwealth Avenue, Boston, MA</p>
+<p>Hours of Operation:</p>
+<ul>
+    <li>Monday - Friday: 9 AM - 10 AM</li>
+    <li>Saturday: 2 PM - 2:05 PM</li>
+    <li>Sunday:  9 AM - 8 PM</li>
+</ul>
+<img src="{% static 'liberty-bell-billerica.jpg' %}" alt="Liberty Bell Image">
+{% endblock %}
