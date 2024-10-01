@@ -11,6 +11,12 @@
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
+<p>Extras Ordered:</p>
+<ul>
+    {% for extra in extras_ordered %}
+    <li>{{ extra }}</li>
+    {% endfor %}
+</ul>
 <p>Total Price: ${{ total_price }}</p>
 <p>Special Instructions: {{ special_instructions }}</p>
 <p>Customer Information:</p>

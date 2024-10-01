@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Restaurant{% endblock %}</title>
+    <title>{% block title %}BBB{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
@@ -12,13 +12,18 @@
         </header>
         <nav>
             <ul>
-                <li><a href="{% url 'main' %}">Main</a></li>
-                <li><a href="{% url 'order' %}">Order</a></li>
+                <li><a href="{% url 'main' %}">Main Page</a></li>
+                <li><a href="{% url 'order' %}">Place an Order!</a></li>
             </ul>
         </nav>
         <main>
             {% block content %}{% endblock %}
         </main>
-    </div>
+        <footer>
+            This page was generated at {{ current_time }}, and was developed by bbouley@bu.edu.
+        </footer>
+
+    </div>  
+
 </body>
 </html>

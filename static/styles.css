@@ -20,8 +20,6 @@ table {
     border: 2px solid black;
 }
 
-
-
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: darkgray;
@@ -65,21 +63,21 @@ ul, li {
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    /* grid-template-columns: repeat(3, 1fr); */
+
     column-gap: 3px;
     margin: 20px auto;
 }
 
 header { 
-    /* header spans all 6 columns */
+
     grid-column: span 6;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgb(4, 44, 3);
 }
 
 nav {
     padding: 30px;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid rgb(4, 44, 3);
     /* vertical-align: top; */
     align-items: top;
 }
@@ -106,18 +104,18 @@ main p {
 
     margin-top: 30px;
     line-height: 2em;
-    color: #777;
+    color: rgb(4, 44, 3);
 }
 
 aside {
     padding: 30px;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid rgb(4, 44, 3);
 }
 
 footer { 
     grid-column: span 6;
     text-align: center;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid rgb(4, 44, 3);
 }
 
 .thumbnail-grid {

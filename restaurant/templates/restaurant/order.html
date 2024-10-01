@@ -7,11 +7,17 @@
 <form method="post" action="{% url 'confirmation' %}">
     {% csrf_token %}
     <p>Menu Items:</p>
-    <label><input type="checkbox" name="items" value="Pizza"> Pizza - $10</label><br>
-    <label><input type="checkbox" name="items" value="Burger"> Burger - $10</label><br>
-    <label><input type="checkbox" name="items" value="Pasta"> Pasta - $10</label><br>
-    <label><input type="checkbox" name="items" value="Salad"> Salad - $10</label><br>
-    <label><input type="checkbox" name="items" value="{{ daily_special }}"> Daily Special: {{ daily_special }} - $10</label><br>
+    <label><input type="checkbox" name="items" value="Pizza"> Pizza - $15</label><br>
+    <label><input type="checkbox" name="items" value="Burger & Fries"> Burger & Fries - $12</label><br>
+    <label><input type="checkbox" name="items" value="Chicken Alfredo"> Chicken Alfredo - $8</label><br>
+    <label><input type="checkbox" name="items" value="Caesar Salad"> Caesar Salad - $6</label><br>
+    <label><input type="checkbox" name="items" value="{{ daily_special }}"> Daily Special: {{ daily_special }} - $18.50</label><br>
+    <p>Extras:</p>
+    <label><input type="checkbox" name="extras" value="Extra Sauce Packets"> Extra Sauce Packets - $1.50</label><br>
+    <label><input type="checkbox" name="extras" value="Extra Utensils"> Extra Utensils - $0.25</label><br>
+    <label><input type="checkbox" name="extras" value="Extra Cheese"> Extra Cheese - $3</label><br>
+    <label><input type="checkbox" name="extras" value="Canned Soda"> Canned Soda - $2</label><br>
+    
     <p>Special Instructions:</p>
     <textarea name="instructions"></textarea><br>
     <p>Customer Information:</p>
@@ -19,5 +25,5 @@
     <label>Phone: <input type="text" name="phone"></label><br>
     <label>Email: <input type="email" name="email"></label><br>
     <button type="submit">Place Order</button>
-</form>
-{% endblock %}
+    </form>
+    {% endblock %}
