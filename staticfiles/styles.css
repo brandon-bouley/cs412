@@ -123,3 +123,9 @@ footer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 10px;
 }
+
+.fbimg {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+}
