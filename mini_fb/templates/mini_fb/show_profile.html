@@ -1,0 +1,20 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+<img src="{{ profile.profile_image_url }}" alt="Profile Image" class="fbimg">
+<p><strong>City:</strong> {{ profile.city }}</p>
+<p><strong>Email:</strong> {{ profile.email }}</p>
+
+<h3>Status Messages</h3>
+<ul>
+    {% for status in profile.get_status_messages %}
+    <li>
+        <p><strong>{{ status.timestamp }}:</strong> {{ status.message }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'create_status' profile.pk %}">Post a Status Message</a>
+<a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
+{% endblock %}
