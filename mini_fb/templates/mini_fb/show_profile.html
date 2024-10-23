@@ -11,6 +11,9 @@
     {% for status in profile.get_status_messages %}
     <li>
         <p><strong>{{ status.timestamp }}:</strong> {{ status.message }}</p>
+        {% for img in status.get_images %}
+        <img src="{{ img.image_file.url }}" alt="Image" class="fbimg">
+        {% endfor %}
     </li>
     {% endfor %}
 </ul>
