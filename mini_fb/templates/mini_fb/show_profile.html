@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
-<img src="{{ profile.profile_image_url }}" alt="Profile Image" class="fbimg">
+<img src="{{ profile.profile_image_url }}" alt="Profile Image" class="fbimg-large">
 <p><strong>City:</strong> {{ profile.city }}</p>
 <p><strong>Email:</strong> {{ profile.email }}</p>
 
@@ -13,11 +13,15 @@
         <p><strong>{{ status.timestamp }}:</strong> {{ status.message }}</p>
         {% for img in status.get_images %}
         <img src="{{ img.image_file.url }}" alt="Image" class="fbimg">
+        <a href="{% url 'delete_image' img.pk %}">Delete Image</a>
         {% endfor %}
+        <a href="{% url 'update_status' status.pk %}">Update</a>
+        <a href="{% url 'delete_status' status.pk %}">Delete</a>
     </li>
     {% endfor %}
 </ul>
 
 <a href="{% url 'create_status' profile.pk %}">Post a Status Message</a>
+<a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
 <a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
 {% endblock %}
