@@ -1,6 +1,6 @@
 # mini_fb/views.py
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, View
 from .models import Profile, StatusMessage, Image
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
@@ -95,3 +95,25 @@ class DeleteImageView(DeleteView):
 
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.status_message.profile.pk})
+    
+class CreateFriendView(View): # New for Assignment 8
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        other_profile = Profile.objects.get(pk=self.kwargs['other_pk'])
+        profile.add_friend(other_profile)
+        return redirect('show_profile', pk=profile.pk)
+
+class ShowFriendSuggestionsView(DetailView): # New for Assignment 8
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+class ShowNewsFeedView(DetailView): # New for Assignment 8
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_feed'] = self.object.get_news_feed()
+        return context

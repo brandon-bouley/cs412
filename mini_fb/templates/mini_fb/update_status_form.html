@@ -1,6 +1,7 @@
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
+<div class="divform">
 <h2>Update Status Message</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -8,4 +9,5 @@
     <input type="file" name="files" multiple />
     <button type="submit">Update Status</button>
 </form>
+</div>
 {% endblock %}

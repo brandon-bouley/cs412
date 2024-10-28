@@ -1,27 +1,68 @@
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
-<h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
-<img src="{{ profile.profile_image_url }}" alt="Profile Image" class="fbimg-large">
-<p><strong>City:</strong> {{ profile.city }}</p>
-<p><strong>Email:</strong> {{ profile.email }}</p>
+<div class="soloprofile-grid">
+    <div class="profile-info">
+        <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+        <img src="{{ profile.profile_image_url }}" alt="Profile Image" class="fbimg-large">
+        <p><strong>City:</strong> {{ profile.city }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+    </div>
+    <div class="profile-friends">
+        <h3>Friends</h3>
+        <div class="profile-grid">
+            {% for friend in profile.get_friends %}
+            <div class="profile-card">
+                <div>
+                    <strong>{{ friend.first_name }} {{ friend.last_name }} </strong>{{ friend.email }}<br>
+                    from {{ friend.city }}<br>
+                    <img src="{{ friend.profile_image_url }}" alt="Friend Image" class="fbimg">
+                </div>
+                <a href="{% url 'show_profile' friend.pk %}" class="view-profile-button">View Profile</a>
+            </div>
+            {% empty %}
+            <p>No friends yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="profile-feed">
+        <h3>Status Messages</h3>
+        <ul class="status-list">
+            {% for status in profile.get_status_messages %}
+            <li class="status-item">
+                <div class="status-header">
+                    <img src="{{ status.profile.profile_image_url }}" alt="User Image" class="status-user-img">
+                    <strong>{{ status.profile.first_name }} {{ status.profile.last_name }}</strong>
+                </div>
 
-<h3>Status Messages</h3>
-<ul>
-    {% for status in profile.get_status_messages %}
-    <li>
-        <p><strong>{{ status.timestamp }}:</strong> {{ status.message }}</p>
-        {% for img in status.get_images %}
-        <img src="{{ img.image_file.url }}" alt="Image" class="fbimg">
-        <a href="{% url 'delete_image' img.pk %}">Delete Image</a>
-        {% endfor %}
-        <a href="{% url 'update_status' status.pk %}">Update</a>
-        <a href="{% url 'delete_status' status.pk %}">Delete</a>
-    </li>
-    {% endfor %}
-</ul>
+                <div class="status-body">
 
-<a href="{% url 'create_status' profile.pk %}">Post a Status Message</a>
-<a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
-<a href="{% url 'show_all_profiles' %}">Back to all profiles</a>
+                    <p class="status-message">{{ status.message }}</p>
+                
+                    <div class="status-images">
+                        {% for img in status.get_images %}
+                        <img src="{{ img.image_file.url }}" alt="Image" class="status-img">
+                        {% endfor %}
+                    </div>
+
+                    <p class="status-timestamp">Posted on {{ status.timestamp }}</p>
+
+                    <div class="status-actions">
+                        <a href="{% url 'update_status' status.pk %}" class="action-button">Update</a>
+                        <a href="{% url 'delete_status' status.pk %}" class="action-button">Delete</a>
+                    </div>
+
+                </div>
+                
+            </li>
+            {% endfor %}
+        </ul>
+    <div class="profile-actions">
+        <a href="{% url 'create_status' profile.pk %}" class="action-button">Post a Status Message</a>
+        <a href="{% url 'update_profile' profile.pk %}" class="action-button">Update Profile</a>
+        <a href="{% url 'friend_suggestions' profile.pk %}" class="action-button">Friend Suggestions</a>
+        <a href="{% url 'news_feed' profile.pk %}" class="action-button">News Feed</a>
+        <a href="{% url 'show_all_profiles' %}" class="action-button">Back to all profiles</a>
+    </div>
+</div>
 {% endblock %}

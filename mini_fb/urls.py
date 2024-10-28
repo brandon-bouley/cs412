@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from .views import ShowAllProfilesView, ShowProfilePageView, CreateProfileView, CreateStatusMessageView, UpdateProfileView, DeleteStatusMessageView, UpdateStatusMessageView, DeleteImageView
+from .views import *
 
 urlpatterns = [
     path('', ShowAllProfilesView.as_view(), name='show_all_profiles'),
@@ -12,5 +12,8 @@ urlpatterns = [
     path('status/<int:pk>/delete/', DeleteStatusMessageView.as_view(), name='delete_status'),
     path('status/<int:pk>/update/', UpdateStatusMessageView.as_view(), name='update_status'),
     path('image/<int:pk>/delete/', DeleteImageView.as_view(), name='delete_image'),
+    path('profile/<int:pk>/add_friend/<int:other_pk>/', CreateFriendView.as_view(), name='create_friend'),
+    path('profile/<int:pk>/friend_suggestions/', ShowFriendSuggestionsView.as_view(), name='friend_suggestions'),
+    path('profile/<int:pk>/news_feed/', ShowNewsFeedView.as_view(), name='news_feed'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

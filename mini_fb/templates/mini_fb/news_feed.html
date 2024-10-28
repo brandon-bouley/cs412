@@ -1,0 +1,36 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<div class="profile-feed">
+<h1>News Feed for {{ profile.first_name }} {{ profile.last_name }}</h1>
+<ul class="status-list">
+    {% for status in news_feed %}
+    <li class="status-item">
+        <div class="status-header">
+            <img src="{{ status.profile.profile_image_url }}" alt="User Image" class="status-user-img">
+            <strong>{{ status.profile.first_name }} {{ status.profile.last_name }}</strong>
+        </div>
+        <div class="status-body">
+            <p class="status-message">{{ status.message }}</p>
+            <div class="status-images">
+                {% for img in status.get_images %}
+                <img src="{{ img.image_file.url }}" alt="Image" class="status-img">
+                {% endfor %}
+            </div>
+            <p class="status-timestamp">Posted on {{ status.timestamp }}</p>
+            <div class="status-actions">
+                <a href="{% url 'update_status' status.pk %}" class="action-button">Update</a>
+                <a href="{% url 'delete_status' status.pk %}" class="action-button">Delete</a>
+            </div>
+        </div>
+    </li>
+    {% empty %}
+    <li>No status messages available.</li>
+    {% endfor %}
+<div class="status-actions">
+<a href="{% url 'show_profile' profile.pk %}" class="action-button">Back to Profile</a>
+</div>
+</ul>
+</div>
+
+{% endblock %}

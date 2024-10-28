@@ -2,21 +2,23 @@
 <html>
 <head>
     <title>Mini FB</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-        <h1>Mini FB</h1>
-        <nav>
-            <a href="{% url 'show_all_profiles' %}">All Profiles</a> |
-            <a href="{% url 'create_profile' %}">Create Profile</a>
-        </nav>
+        <div class="header-container">
+            <h1 class="logo">MINI FB</h1>
+            <nav>
+                <a href="{% url 'show_all_profiles' %}" class="nav-button">All Profiles</a>
+                <a href="{% url 'create_profile' %}" class="nav-button">Create Profile</a>
+            </nav>
+        </div>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p>&copy; 2023 Mini FB</p>
+        <p>&copy; 2024 Mini FB</p>
     </footer>
 </body>
 </html>
