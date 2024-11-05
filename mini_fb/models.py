@@ -1,12 +1,16 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     city = models.CharField(max_length=50)
     email = models.EmailField()
     profile_image_url = models.URLField()
+    
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -42,12 +46,6 @@ class Profile(models.Model):
         friends = self.get_friends()
         news_feed = StatusMessage.objects.filter(profile__in=friends).order_by('-timestamp')
         return news_feed
-
-    
-    
-    
-
-    
 
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)

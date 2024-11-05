@@ -9,16 +9,30 @@
         <div class="header-container">
             <h1 class="logo">MINI FB</h1>
             <nav>
+                {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}!</span>
                 <a href="{% url 'show_all_profiles' %}" class="nav-button">All Profiles</a>
+              
+                
+                {% for profile in profiles %}
+                    {% if profile.user == user %}
+                        <a href="{% url 'show_profile' profile.pk %}" class="nav-button">My Profile</a>
+                    {% endif %}
+                {% endfor %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-button">Logout</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="nav-button">Login</a>
                 <a href="{% url 'create_profile' %}" class="nav-button">Create Profile</a>
+                <a href="{% url 'show_all_profiles' %}" class="nav-button">All Profiles</a>
+                {% endif %}
             </nav>
         </div>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        <p>&copy; 2024 Mini FB</p>
-    </footer>
 </body>
 </html>

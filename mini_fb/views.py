@@ -1,14 +1,20 @@
-# mini_fb/views.py
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.shortcuts import redirect
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, View
 from .models import Profile, StatusMessage, Image
-from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
+from .forms import *
 from django.urls import reverse
 
 class ShowAllProfilesView(ListView):
     model = Profile
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles'
+
+    def dispatch(self, *args, **kwargs): # New for Assignment 9
+        print("self.request.user={self.request.user}")
+        return super().dispatch(*args, **kwargs)
 
 class ShowProfilePageView(DetailView):
     model = Profile
@@ -20,46 +26,59 @@ class CreateProfileView(CreateView):
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
 
-    def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.object.pk})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_form'] = UserCreationForm()
+        return context
 
-class CreateStatusMessageView(CreateView):
+    def form_valid(self, form):
+        user_form = UserCreationForm(self.request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            form.instance.user = user
+            login(self.request, user)  # Automatically log in the user
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     model = StatusMessage
     form_class = CreateStatusMessageForm
     template_name = 'mini_fb/create_status_form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['profile'] = Profile.objects.get(pk=self.kwargs['pk'])
+        context['profile'] = self.get_object()
         return context
 
     def form_valid(self, form):
-        # Save the status message to the database
         sm = form.save(commit=False)
-        sm.profile = Profile.objects.get(pk=self.kwargs['pk'])
+        sm.profile = self.get_object()
         sm.save()
-
-        # Read the files from the form
         files = self.request.FILES.getlist('files')
         for file in files:
-            # Create an Image object for each file
             image = Image(status_message=sm, image_file=file)
             image.save()
-
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.kwargs['pk']})
+        return reverse('show_profile', kwargs={'pk': self.get_object().pk})
 
-class UpdateProfileView(UpdateView):
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
+
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
 
-    def get_success_url(self):
-        return reverse('show_profile', kwargs={'pk': self.object.pk})
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
 
-class DeleteStatusMessageView(DeleteView):
+    def get_success_url(self):
+        return reverse('show_profile', kwargs={'pk': self.get_object().pk})
+
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     model = StatusMessage
     template_name = 'mini_fb/delete_status_form.html'
     context_object_name = 'status_message'
@@ -67,7 +86,7 @@ class DeleteStatusMessageView(DeleteView):
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
 
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
     model = StatusMessage
     form_class = UpdateStatusMessageForm
     template_name = 'mini_fb/update_status_form.html'
@@ -88,7 +107,7 @@ class UpdateStatusMessageView(UpdateView):
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
 
-class DeleteImageView(DeleteView):
+class DeleteImageView(LoginRequiredMixin, DeleteView):
     model = Image
     template_name = 'mini_fb/delete_image_form.html'
     context_object_name = 'image'
@@ -96,22 +115,28 @@ class DeleteImageView(DeleteView):
     def get_success_url(self):
         return reverse('show_profile', kwargs={'pk': self.object.status_message.profile.pk})
     
-class CreateFriendView(View): # New for Assignment 8
+class CreateFriendView(LoginRequiredMixin, View):
     def dispatch(self, request, *args, **kwargs):
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        profile = Profile.objects.get(user=self.request.user)
         other_profile = Profile.objects.get(pk=self.kwargs['other_pk'])
         profile.add_friend(other_profile)
         return redirect('show_profile', pk=profile.pk)
-
-class ShowFriendSuggestionsView(DetailView): # New for Assignment 8
+    
+class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'mini_fb/friend_suggestions.html'
     context_object_name = 'profile'
 
-class ShowNewsFeedView(DetailView): # New for Assignment 8
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
+
+class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'mini_fb/news_feed.html'
     context_object_name = 'profile'
+
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -12,7 +12,7 @@
             <img src="{{ suggestion.profile_image_url }}" alt="Profile Image" class="fbimg">
         </div>
         <a href="{% url 'show_profile' suggestion.pk %}" class="view-profile-button">View Profile</a>
-        <a href="{% url 'create_friend' profile.pk suggestion.pk %}" class="add-friend-button">Add Friend</a>
+        <a href="{% url 'create_friend' suggestion.pk %}" class="add-friend-button">Add Friend</a>
     </div>
     {% empty %}
     <p>No friend suggestions available.</p>
