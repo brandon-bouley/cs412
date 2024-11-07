@@ -1,0 +1,61 @@
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<h1>Voter Graphs</h1>
+
+<form method="get" class="filter-form">
+    <div class="form-group">
+        <label for="{{ form.party_affiliation.id_for_label }}">Party Affiliation:</label>
+        {{ form.party_affiliation }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.min_dob.id_for_label }}">Min Date of Birth:</label>
+        {{ form.min_dob }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.max_dob.id_for_label }}">Max Date of Birth:</label>
+        {{ form.max_dob }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.voter_score.id_for_label }}">Voter Score:</label>
+        {{ form.voter_score }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.v20state.id_for_label }}">Voted in 2020 State Election:</label>
+        {{ form.v20state }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.v21town.id_for_label }}">Voted in 2021 Town Election:</label>
+        {{ form.v21town }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.v21primary.id_for_label }}">Voted in 2021 Primary Election:</label>
+        {{ form.v21primary }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.v22general.id_for_label }}">Voted in 2022 General Election:</label>
+        {{ form.v22general }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.v23town.id_for_label }}">Voted in 2023 Town Election:</label>
+        {{ form.v23town }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+    <div class="form-group">
+        <a href="{% url 'voters' %}" class="btn btn-info">View Voters</a>
+    </div>
+    
+</form>
+<div class="graphs">
+    <div class="graph">
+        {{ birth_year_hist_div|safe }}
+    </div>
+    <div class="graph">
+        {{ party_affiliation_pie_div|safe }}
+    </div>
+    <div class="graph">
+        {{ election_hist_div|safe }}
+    </div>
+</div>
+{% endblock %}
