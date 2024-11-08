@@ -13,7 +13,7 @@ class VoterListView(ListView):
     paginate_by = 100
 
     def get_queryset(self):
-        queryset = Voter.objects.all()
+        queryset = super().get_queryset().order_by('last_name')
         form = VoterFilterForm(self.request.GET)
         if form.is_valid():
             if form.cleaned_data['party_affiliation']:
