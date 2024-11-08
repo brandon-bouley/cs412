@@ -9,7 +9,7 @@ gunicorn = "*"
 pillow = "*"
 whitenoise = "*"
 plotly = "*"
-panda = "*"
+pandas = "*"
 
 [dev-packages]
 
