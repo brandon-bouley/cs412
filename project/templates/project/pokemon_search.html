@@ -1,0 +1,23 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Search Pokémon{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Search Pokémon</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Search</button>
+    </form>
+    {% if form.errors %}
+        <ul class="error-list">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

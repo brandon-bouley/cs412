@@ -1,0 +1,86 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Add Pokémon to Team{% endblock %}
+
+{% block content %}
+<div class="pokemon-form-container">
+    <h1>Add Pokémon to Team</h1>
+    <h2>{{ pokemon.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Nickname Field -->
+        <div class="form-group">
+            <label for="{{ form.nickname.id_for_label }}">{{ form.nickname.label }}</label>
+            {{ form.nickname }}
+        </div>
+        <!-- Nature Field -->
+        <div class="form-group">
+            <label for="{{ form.nature.id_for_label }}">{{ form.nature.label }}</label>
+            {{ form.nature }}
+        </div>
+        <!-- EV Fields -->
+        <div class="form-group">
+            <label for="{{ form.ev_health.id_for_label }}">Health EVs: <span id="ev_health_value">0</span></label>
+            {{ form.ev_health }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.ev_attack.id_for_label }}">Attack EVs: <span id="ev_attack_value">0</span></label>
+            {{ form.ev_attack }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.ev_special_attack.id_for_label }}">Special Attack EVs: <span id="ev_special_attack_value">0</span></label>
+            {{ form.ev_special_attack }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.ev_defense.id_for_label }}">Defense EVs: <span id="ev_defense_value">0</span></label>
+            {{ form.ev_defense }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.ev_special_defense.id_for_label }}">Special Defense EVs: <span id="ev_special_defense_value">0</span></label>
+            {{ form.ev_special_defense }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.ev_speed.id_for_label }}">Speed EVs: <span id="ev_speed_value">0</span></label>
+            {{ form.ev_speed }}
+        </div>
+        <!-- Moveset Field -->
+        <div class="form-group">
+            <label for="{{ form.moveset.id_for_label }}">{{ form.moveset.label }}</label>
+            {{ form.moveset }}
+        </div>
+        <!-- Non-field Errors -->
+        {% if form.non_field_errors %}
+            <ul class="error-list">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Add Pokémon</button>
+    </form>
+</div>
+
+<script>
+    /**
+     * Updates the displayed EV value for a given EV type.
+     * @param {string} evType - The ID of the EV input element.
+     */
+    function updateEVValue(evType) {
+        const slider = document.getElementById(evType);
+        const valueDisplay = document.getElementById(evType + '_value');
+        valueDisplay.textContent = slider.value;
+    }
+
+    // Initialize the EV values and bind the oninput event
+    document.addEventListener('DOMContentLoaded', function() {
+        const evTypes = ['id_ev_health', 'id_ev_attack', 'id_ev_special_attack', 'id_ev_defense', 'id_ev_special_defense', 'id_ev_speed'];
+        evTypes.forEach(function(evType) {
+            updateEVValue(evType);
+            document.getElementById(evType).oninput = function() {
+                updateEVValue(evType);
+            };
+        });
+    });
+</script>
+{% endblock %}

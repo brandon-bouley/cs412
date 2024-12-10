@@ -236,7 +236,7 @@ nav {
 h1 {
     text-align: center;
     font-size: 36px;
-    color: darkgray;
+    color: white;
 }
 
 h2 {
@@ -334,7 +334,7 @@ main p {
 
     margin-top: 30px;
     line-height: 2em;
-    color: rgb(4, 44, 3);
+    color: white;
 }
 
 aside {
@@ -425,4 +425,344 @@ footer {
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+.generation-links {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.generation-links a {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.generation-links a:hover {
+    background-color: #e0e0e0;
+}
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pokemon-button {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 150px;
+}
+
+.pokemon-button img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.pokemon-button span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    margin: 20px;
+}
+.pokemon-grid h1 {
+    color: black;
+}
+
+.pokemon-grid p {
+    color: black;
+}
+
+.pokemon-sprite, .pokemon-stats, .pokemon-moveset {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-sprite {
+    text-align: center;
+}
+
+.pokemon-stats h3, .pokemon-moveset h3 {
+    text-align: center;
+}
+
+.pokemon-moveset ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.pokemon-moveset li {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.pokemon-form-container {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.pokemon-form-container h1, .pokemon-form-container h2 .pokemon-form-container p {
+    text-align: center;
+    color: black;
+}
+
+
+
+.form-group {
+    margin-bottom: 20px;
+    color: black;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="range"] {
+    width: 100%;
+}
+
+.error-list {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.team-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.team-list-container p {
+    color: black;
+}
+
+.team-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.team-card {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-card h2 {
+    margin-top: 0;
+}
+
+.team-pokemon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.team-pokemon img {
+    width: 50px;
+    height: 50px;
+}
+
+.edit-button, .delete-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.edit-button:hover, .delete-button:hover {
+    opacity: 0.8;
+}
+
+.delete-confirmation {
+    text-align: center;
+    padding: 20px;
+}
+
+.delete-confirmation button, .delete-confirmation a {
+    margin: 10px;
+}
+
+.trainer-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.trainer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.trainer-card {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.trainer-card a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.create-button {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 200px;
+}
+
+.create-button:hover {
+    background-color: #0056b3;
+}
+
+.trainer-detail-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    
+}
+
+.trainer-detail-container p {
+    color: white;
+    text-align: center;
+
+}
+
+.trainer-detail-container h2 {
+    color: white;
+    text-align: left;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.team-card {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-card h3 {
+    margin-top: 0;
+}
+
+.view-button {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+.export-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.export-button:hover {
+    background-color: #218838;
 }

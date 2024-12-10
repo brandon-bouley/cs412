@@ -1,0 +1,15 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Delete Team{% endblock %}
+
+{% block content %}
+<div class="delete-confirmation">
+    <h1>Delete Team</h1>
+    <p>Are you sure you want to delete the team "{{ team.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">Yes, delete</button>
+        <a href="{% url 'team_list' %}" class="edit-button">Cancel</a>
+    </form>
+</div>
+{% endblock %}

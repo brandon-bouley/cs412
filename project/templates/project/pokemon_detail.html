@@ -1,0 +1,37 @@
+{% extends 'project/base.html' %}
+
+{% block title %}{{ pokemon.name }} Details{% endblock %}
+
+{% block content %}
+<h1>{{ pokemon.name }}</h1>
+<div class="pokemon-grid">
+    <!-- Pokémon Stats Section -->
+    <div class="pokemon-stats">
+        <img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }}">
+        <h3>Stats</h3>
+        <p>Type: {{ pokemon.type1 }}{% if pokemon.type2 %} / {{ pokemon.type2 }}{% endif %}</p>
+        <p>Ability: {{ pokemon.ability }}</p>
+        <p>Health: {{ pokemon.health }}</p>
+        <p>Attack: {{ pokemon.attack }}</p>
+        <p>Special Attack: {{ pokemon.special_attack }}</p>
+        <p>Defense: {{ pokemon.defense }}</p>
+        <p>Special Defense: {{ pokemon.special_defense }}</p>
+        <p>Speed: {{ pokemon.speed }}</p>
+    </div>
+    <!-- Pokémon Learnset Section -->
+    <div class="pokemon-moveset">
+        <h3>Learnset</h3>
+        <ul>
+            {% for move in pokemon.learnset.all %}
+            <li>
+                <strong>{{ move.name }}</strong><br>
+                Power: {{ move.power|default:"-" }}<br>
+                Accuracy: {{ move.accuracy|default:"-" }}<br>
+                {{ move.pp|default:"-" }} PP <br>
+                {{ move.flavor_text|default:"-" }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

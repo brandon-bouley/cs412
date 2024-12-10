@@ -1,0 +1,17 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Trainers{% endblock %}
+
+{% block content %}
+<div class="trainer-list-container">
+    <h1>Trainers</h1>
+    <div class="trainer-grid">
+        {% for trainer in trainers %}
+        <div class="trainer-card">
+            <a href="{% url 'trainer_detail' trainer.id %}">{{ trainer.username }}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'trainer_create' %}" class="create-button">Create New Trainer</a>
+</div>
+{% endblock %}

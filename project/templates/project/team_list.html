@@ -1,0 +1,24 @@
+{% extends 'project/base.html' %}
+
+{% block title %}View Teams{% endblock %}
+
+{% block content %}
+<div class="team-list-container">
+    <h1>All Teams</h1>
+    <ul class="team-list">
+        {% for team in teams %}
+            <li class="team-card">
+                <h2>{{ team.name }}</h2>
+                <p>Trainer: {{ team.trainer }}</p>
+                <div class="team-pokemon">
+                    {% for team_pokemon in team.teampokemon_set.all %}
+                        <img src="{{ team_pokemon.pokemon.sprite }}" alt="{{ team_pokemon.pokemon.name }}">
+                    {% endfor %}
+                </div>
+                <a href="{% url 'team_detail' team.pk %}" class="edit-button">Edit Team</a>
+                <a href="{% url 'delete_team' team.pk %}" class="delete-button">Delete Team</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

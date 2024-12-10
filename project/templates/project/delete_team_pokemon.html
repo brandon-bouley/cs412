@@ -1,0 +1,18 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Delete Pokémon from Team</title>
+</head>
+<body>
+    <h1>Delete Pokémon from Team</h1>
+    <p>Are you sure you want to delete {{ object.pokemon.name }} from the team?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'team_detail' pk=object.team.pk %}">Cancel</a>
+    </form>
+</body>
+</html>
+{% endblock %}

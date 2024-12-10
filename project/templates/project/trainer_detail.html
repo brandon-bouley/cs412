@@ -1,0 +1,20 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Trainer Detail{% endblock %}
+
+{% block content %}
+<div class="trainer-detail-container">
+    <h1>{{ trainer.username }}</h1>
+    <p> {{ trainer.email }}</p>
+
+    <h2>Teams:</h2>
+    <div class="team-grid">
+        {% for team in trainer.team_set.all %}
+        <div class="team-card">
+            <h3>{{ team.name }}</h3>
+            <a href="{% url 'team_detail' team.pk %}" class="view-button">View Team</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

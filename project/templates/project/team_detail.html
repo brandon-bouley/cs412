@@ -1,0 +1,37 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Team Detail{% endblock %}
+
+{% block content %}
+<div class="pokemon-grid">
+    <!-- Team Information Section -->
+    <div class="pokemon-sprite">
+        <h1>{{ team.name }}</h1>
+        <p>Trainer: {{ team.trainer }}</p>
+    </div>
+    <!-- Pokémon List Section -->
+    <div class="pokemon-stats">
+        <h2>Pokémon</h2>
+        <ul class="pokemon-list">
+            {% for team_pokemon in team.teampokemon_set.all %}
+                <li class="pokemon-button">
+                    <img src="{{ team_pokemon.pokemon.sprite }}" alt="{{ team_pokemon.pokemon.name }}">
+                    <span>{{ team_pokemon.nickname|default:team_pokemon.pokemon.name }}<br>Ability: {{ team_pokemon.pokemon.ability }}</span>
+                    <!-- Pokémon Moveset -->
+                    <ul class="pokemon-moveset">
+                        {% for move in team_pokemon.moveset.all %}
+                            <li>{{ move.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Edit and Delete Buttons -->
+                    <a class="edit-button" href="{% url 'edit_team_pokemon' team.pk team_pokemon.pk %}">Edit</a>
+                    <a class="edit-button" href="{% url 'delete_team_pokemon' team.pk team_pokemon.pk %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <!-- Add Pokémon and Export Team Buttons -->
+        <a href="{% url 'search_pokemon' team.pk %}" class="edit-button">Add Pokémon</a>
+        <a href="{% url 'export_team' team.pk %}" class="export-button">Export Team</a>
+    </div>
+</div>
+{% endblock %}

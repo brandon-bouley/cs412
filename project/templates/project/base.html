@@ -1,0 +1,25 @@
+{% load static %}
+<head>
+    <title>{% block title %}Pokémon Team Builder{% endblock %}</title>
+    <!-- Link to the main stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Pokémon Team Builder</h1>
+        <!-- Navigation links -->
+        <a href="{% url 'pokemon_list' %}" class="nav-button">All Pokémon</a>
+        <a href="{% url 'trainer_list' %}" class="nav-button">Trainers</a>
+        <a href="{% url 'create_team' %}" class="nav-button">Create Team</a>
+        <a href="{% url 'team_list' %}" class="nav-button">View Teams</a>
+    </header>
+
+    <main>
+        <!-- Content block to be overridden by child templates -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
