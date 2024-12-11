@@ -368,7 +368,13 @@ footer {
 .form-group {
     display: flex;
     flex-direction: column;
-    color: white;
+    color: rgb(0, 0, 0);
+}
+
+.form-group-search {
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
 }
 
 .form-group label {
