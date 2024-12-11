@@ -20,27 +20,27 @@
         </div>
         <!-- EV Fields -->
         <div class="form-group">
-            <label for="{{ form.ev_health.id_for_label }}">Health EVs: <span id="ev_health_value">0</span></label>
+            <label for="{{ form.ev_health.id_for_label }}">Health EVs: <span id="id_ev_health_value">{{ form.ev_health.value }}</span></label>
             {{ form.ev_health }}
         </div>
         <div class="form-group">
-            <label for="{{ form.ev_attack.id_for_label }}">Attack EVs: <span id="ev_attack_value">0</span></label>
+            <label for="{{ form.ev_attack.id_for_label }}">Attack EVs: <span id="id_ev_attack_value">{{ form.ev_attack.value }}</span></label>
             {{ form.ev_attack }}
         </div>
         <div class="form-group">
-            <label for="{{ form.ev_special_attack.id_for_label }}">Special Attack EVs: <span id="ev_special_attack_value">0</span></label>
+            <label for="{{ form.ev_special_attack.id_for_label }}">Special Attack EVs: <span id="id_ev_special_attack_value">{{ form.ev_special_attack.value }}</span></label>
             {{ form.ev_special_attack }}
         </div>
         <div class="form-group">
-            <label for="{{ form.ev_defense.id_for_label }}">Defense EVs: <span id="ev_defense_value">0</span></label>
+            <label for="{{ form.ev_defense.id_for_label }}">Defense EVs: <span id="id_ev_defense_value">{{ form.ev_defense.value }}</span></label>
             {{ form.ev_defense }}
         </div>
         <div class="form-group">
-            <label for="{{ form.ev_special_defense.id_for_label }}">Special Defense EVs: <span id="ev_special_defense_value">0</span></label>
+            <label for="{{ form.ev_special_defense.id_for_label }}">Special Defense EVs: <span id="id_ev_special_defense_value">{{ form.ev_special_defense.value }}</span></label>
             {{ form.ev_special_defense }}
         </div>
         <div class="form-group">
-            <label for="{{ form.ev_speed.id_for_label }}">Speed EVs: <span id="ev_speed_value">0</span></label>
+            <label for="{{ form.ev_speed.id_for_label }}">Speed EVs: <span id="id_ev_speed_value">{{ form.ev_speed.value }}</span></label>
             {{ form.ev_speed }}
         </div>
         <!-- Moveset Field -->
@@ -69,7 +69,9 @@
     function updateEVValue(evType) {
         const slider = document.getElementById(evType);
         const valueDisplay = document.getElementById(evType + '_value');
-        valueDisplay.textContent = slider.value;
+        if (slider && valueDisplay) {
+            valueDisplay.textContent = slider.value;
+        }
     }
 
     // Initialize the EV values and bind the oninput event
@@ -77,9 +79,12 @@
         const evTypes = ['id_ev_health', 'id_ev_attack', 'id_ev_special_attack', 'id_ev_defense', 'id_ev_special_defense', 'id_ev_speed'];
         evTypes.forEach(function(evType) {
             updateEVValue(evType);
-            document.getElementById(evType).oninput = function() {
-                updateEVValue(evType);
-            };
+            const slider = document.getElementById(evType);
+            if (slider) {
+                slider.addEventListener('input', function() {
+                    updateEVValue(evType);
+                });
+            }
         });
     });
 </script>

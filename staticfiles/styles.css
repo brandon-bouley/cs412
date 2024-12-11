@@ -365,16 +365,6 @@ footer {
     margin-bottom: 2rem;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    color: white;
-}
-
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
 
 .voter-card {
     border: 1px solid #ddd;
@@ -556,7 +546,7 @@ footer {
 .form-group {
     display: flex;
     flex-direction: column;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .form-group-search {
@@ -569,7 +559,7 @@ footer {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .form-group input[type="range"] {
