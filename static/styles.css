@@ -561,6 +561,7 @@ footer {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: white;
 }
 
 .form-group input[type="range"] {
