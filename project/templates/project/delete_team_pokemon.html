@@ -10,8 +10,8 @@
     <p>Are you sure you want to delete {{ object.pokemon.name }} from the team?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, delete</button>
-        <a href="{% url 'team_detail' pk=object.team.pk %}">Cancel</a>
+        <button type="submit" class="delete-button">Yes, delete</button>
+        <a href="{% url 'team_detail' pk=object.team.pk %}" class="edit-button">Cancel</a>
     </form>
 </body>
 </html>

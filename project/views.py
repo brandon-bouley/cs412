@@ -100,14 +100,18 @@ class PokemonSearchView(FormView):
     template_name = 'project/pokemon_search.html'
     form_class = PokemonSearchForm
 
-    def form_valid(self, form):
-        pokemons = form.search()
-        if pokemons.exists():
-            pokemon = pokemons.first()  # Assuming you want to select the first match
-            return redirect('add_team_pokemon', pk=self.kwargs['pk'], dexnum=pokemon.dexnum)
-        else:
-            form.add_error('name', 'No Pokémon found with this name')
-            return self.form_invalid(form)
+    def get_queryset(self):
+        queryset = Pokemon.objects.all()
+        name = self.request.GET.get('name')
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pokemons'] = self.get_queryset()
+        context['name'] = self.request.GET.get('name', '')
+        return context
 
 class CreateTeamPokemonView(CreateView):
     """

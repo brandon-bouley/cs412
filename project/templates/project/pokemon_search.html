@@ -3,21 +3,37 @@
 {% block title %}Search Pokémon{% endblock %}
 
 {% block content %}
-<div class="form-container">
-    <h1>Search Pokémon</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+<h1>Search Pokémon</h1>
+
+<div class="generation-links">
+    <a href="?generation=all">All</a>
+    <a href="?generation=1">Generation I</a>
+    <a href="?generation=2">Generation II</a>
+    <a href="?generation=3">Generation III</a>
+    <a href="?generation=4">Generation IV</a>
+    <a href="?generation=5">Generation V</a>
+    <a href="?generation=6">Generation VI</a>
+    <a href="?generation=7">Generation VII</a>
+    <a href="?generation=8">Generation VIII</a>
+    <a href="?generation=9">Generation IX</a>
+</div>
+
+<form method="get" action="">
+    <div class="form-group">
+        <label for="name">Filter by Name:</label>
+        <input type="text" id="name" name="name" value="{{ name }}">
         <button type="submit" class="submit-button">Search</button>
-    </form>
-    {% if form.errors %}
-        <ul class="error-list">
-            {% for field, errors in form.errors.items %}
-                {% for error in errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
-    {% endif %}
+    </div>
+</form>
+
+<div class="pokemon-list">
+    {% for pokemon in pokemons %}
+    <div class="pokemon-button">
+        <a href="{% url 'add_team_pokemon' pk=view.kwargs.pk dexnum=pokemon.dexnum %}">
+            <img src="{{ pokemon.sprite }}" alt="{{ pokemon.name }}">
+            <span>{{ pokemon.name }}</span>
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
