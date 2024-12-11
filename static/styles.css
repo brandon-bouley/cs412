@@ -552,9 +552,17 @@ footer {
 }
 
 
+
 .form-group {
-    margin-bottom: 20px;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+}
+
+.form-group-search {
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
 }
 
 .form-group label {

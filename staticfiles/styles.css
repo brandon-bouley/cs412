@@ -368,13 +368,7 @@ footer {
 .form-group {
     display: flex;
     flex-direction: column;
-    color: rgb(0, 0, 0);
-}
-
-.form-group-search {
-    display: flex;
-    flex-direction: column;
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 .form-group label {
@@ -560,14 +554,22 @@ footer {
 
 
 .form-group {
-    margin-bottom: 20px;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+}
+
+.form-group-search {
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
 }
 
 .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: white;
 }
 
 .form-group input[type="range"] {
